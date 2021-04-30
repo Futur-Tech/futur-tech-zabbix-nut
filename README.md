@@ -24,8 +24,11 @@ Right now only pfSense is supported.
     - [ ] Test your installation by running the following command:
     ```bash
     /root/scripts/pfsense-nut-ups.sh name_of_your_ups
+    # This should return a text string with the relevant UPS data.
+    
+    zabbix_agentd -c /usr/local/etc/zabbix50/zabbix_agentd.conf -t upsmon[ups.discovery]
+    # This should return the name of your UPS
     ```
-    > This should return a text string with the relevant UPS data.
 
 - [ ] Import the XML template to Zabbix 
 - [ ] Add the template to the pfSense host and LLD should do the rest.
