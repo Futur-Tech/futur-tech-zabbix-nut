@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Hello World"
+
 state_num(){
     case $state in
 	OL)		echo 1 ;;
