@@ -284,7 +284,7 @@ if [ $ups = ups.discovery ]; then
         if [ $first -eq 0 ]; then
             echo -e ","
         fi
-        echo -en "\t\t{ \"{#UPSNAME}\":\t\"${discovered}\" }"
+        echo -e "\t\t{ \"{#UPSNAME}\":\t\"${discovered}\" }"
         first=0
     done
     echo -e "\n\t]\n}"
