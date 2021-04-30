@@ -23,7 +23,7 @@ Right now only pfSense is supported.
 - [ ] Go to **Diagnostics** > **Command Prompt**
     - [ ] Test your installation by running the following command:
     ```bash
-    /root/scripts/pfsense-nut-ups.sh ups
+    /root/scripts/pfsense-nut-ups.sh name_of_your_ups
     ```
     > This should return a text string with the relevant UPS data.
 
