@@ -10,7 +10,7 @@ Right now only pfSense is supported.
 - [ ] Go to **Diagnostics** > **Command Prompt**
     - [ ] Download the script by running this command:
     ```bash
-    [ -d "/root/scripts" ] || mkdir /root/scripts ; curl -o /root/scripts/pfsense-nut-ups.sh https://raw.githubusercontent.com/Futur-Tech/futur-tech-zabbix-nut/main/pfsense-nut-ups.sh
+    [ -d "/root/scripts" ] || mkdir /root/scripts ; curl -o /root/scripts/pfsense-nut-ups.sh https://raw.githubusercontent.com/Futur-Tech/futur-tech-zabbix-nut/main/pfsense-nut-ups.sh ; chmod u+x /root/scripts/pfsense-nut-ups.sh
     ```
     > You can add this command to **Services** > **Shellcmd** in order to download the latest version of the script, each time you reboot or restore a config backup.
 
