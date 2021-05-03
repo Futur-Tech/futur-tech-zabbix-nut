@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.0</version>
-    <date>2017-11-02T09:38:41Z</date>
+    <version>5.0</version>
+    <date>2021-05-03T15:33:36Z</date>
     <groups>
         <group>
-            <name>UPS</name>
+            <name>Templates/Futur-Tech/Modules pfSense</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>NUT UPS</template>
-            <name>Network UPS Tools (NUT)</name>
-            <description/>
+            <template>Template Futur-Tech Module pfSense NUT UPS</template>
+            <name>Template Futur-Tech Module pfSense NUT UPS</name>
             <groups>
                 <group>
-                    <name>UPS</name>
+                    <name>Templates/Futur-Tech/Modules pfSense</name>
                 </group>
             </groups>
             <applications>
@@ -22,384 +21,124 @@
                     <name>NUT UPS</name>
                 </application>
             </applications>
-            <items/>
             <discovery_rules>
                 <discovery_rule>
                     <name>NUT UPS Discovery</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <snmp_oid/>
                     <key>upsmon[ups.discovery]</key>
-                    <delay>30</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
-                        <conditions/>
-                    </filter>
-                    <lifetime>30</lifetime>
-                    <description/>
+                    <delay>6h</delay>
                     <item_prototypes>
                         <item_prototype>
                             <name>UPS {#UPSNAME} battery charge</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},battery.charge]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <delay>30s</delay>
+                            <value_type>FLOAT</value_type>
                             <units>%</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last(0)}&lt;40</expression>
+                                    <name>UPS {#UPSNAME} Battery level &lt; 40%</name>
+                                    <priority>DISASTER</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}&lt;90</expression>
+                                    <name>UPS {#UPSNAME} Battery level &lt; 90%</name>
+                                    <priority>INFO</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} battery runtime</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>1</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},battery.runtime]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <delay>30s</delay>
+                            <value_type>FLOAT</value_type>
                             <units>min.</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>0.016666666666667</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.016666666666667</params>
+                                </step>
+                            </preprocessing>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} battery voltage</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},battery.voltage]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <delay>30s</delay>
+                            <value_type>FLOAT</value_type>
                             <units>В</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} driver name NUT</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},driver.name]</key>
-                            <delay>3600</delay>
-                            <history>90</history>
+                            <delay>5h</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <value_type>TEXT</value_type>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} AC input frequency</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},input.frequency]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <value_type>FLOAT</value_type>
                             <units>Гц</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} AC input voltage</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},input.voltage]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <value_type>FLOAT</value_type>
                             <units>В</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} AC output voltage</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},output.voltage]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <value_type>FLOAT</value_type>
                             <units>В</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 2</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-2]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -408,44 +147,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 3</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-3]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -454,44 +162,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 4</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-4]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -500,44 +177,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 5</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-5]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -546,44 +192,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 6</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-6]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -592,44 +207,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 7</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-7]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -638,44 +222,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 8</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-8]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -684,44 +237,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 9</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-9]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -730,44 +252,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm 10</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm-10]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -776,44 +267,13 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} alarm</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.alarm]</key>
-                            <delay>10</delay>
-                            <history>90</history>
+                            <delay>30s</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -822,220 +282,63 @@
                             <valuemap>
                                 <name>NUT UPS Alarm</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} load</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.load]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <delay>30s</delay>
+                            <value_type>FLOAT</value_type>
                             <units>%</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} manufacturer</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.mfr]</key>
-                            <delay>3600</delay>
-                            <history>90</history>
+                            <delay>5h</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <value_type>TEXT</value_type>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} model</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.model]</key>
-                            <delay>3600</delay>
-                            <history>90</history>
+                            <delay>5h</delay>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <value_type>TEXT</value_type>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} nominal wattage</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.power.nominal]</key>
-                            <delay>3600</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <delay>5h</delay>
                             <units>Вт</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} status 2</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.status-2]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <delay>30s</delay>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -1044,44 +347,12 @@
                             <valuemap>
                                 <name>NUT UPS Status</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} status 3</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.status-3]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <delay>30s</delay>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -1090,44 +361,12 @@
                             <valuemap>
                                 <name>NUT UPS Status</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} status 4</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.status-4]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <delay>30s</delay>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -1136,44 +375,12 @@
                             <valuemap>
                                 <name>NUT UPS Status</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} status 5</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.status-5]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <delay>30s</delay>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -1182,44 +389,12 @@
                             <valuemap>
                                 <name>NUT UPS Status</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} status</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.status]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
+                            <delay>30s</delay>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
@@ -1228,356 +403,161 @@
                             <valuemap>
                                 <name>NUT UPS Status</name>
                             </valuemap>
-                            <logtimefmt/>
-                            <application_prototypes/>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=5</expression>
+                                    <name>UPS {#UPSNAME} status - Battery charging</name>
+                                    <priority>INFO</priority>
+                                    <description>UPS battery charging</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=7</expression>
+                                    <name>UPS {#UPSNAME} Status - Bypass</name>
+                                    <priority>DISASTER</priority>
+                                    <description>UPS bypass circuit is active echo no battery protection is available</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=8</expression>
+                                    <name>UPS {#UPSNAME} status - Calibration</name>
+                                    <priority>INFO</priority>
+                                    <description>UPS battery calibration</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=3</expression>
+                                    <name>UPS {#UPSNAME} status - Low battery</name>
+                                    <priority>DISASTER</priority>
+                                    <description>UPS low battery</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=2</expression>
+                                    <name>UPS {#UPSNAME} status - On battery</name>
+                                    <priority>HIGH</priority>
+                                    <description>UPS on battery</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=10</expression>
+                                    <name>UPS {#UPSNAME} status - overloadа</name>
+                                    <priority>DISASTER</priority>
+                                    <description>UPS overload!</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=9</expression>
+                                    <name>UPS {#UPSNAME} status - Switched off</name>
+                                    <priority>DISASTER</priority>
+                                    <description>UPS switched off!</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=11</expression>
+                                    <name>UPS {#UPSNAME} status - Trimming incoming voltage</name>
+                                    <priority>HIGH</priority>
+                                    <description>UPS trimming incoming voltage</description>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=0</expression>
+                                    <name>UPS {#UPSNAME} Unknown status</name>
+                                    <priority>DISASTER</priority>
+                                    <description>UPS status unknown</description>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>UPS {#UPSNAME} temperature</name>
-                            <type>0</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <type>ZABBIX_ACTIVE</type>
                             <key>upsmon[{#UPSNAME},ups.temperature]</key>
-                            <delay>10</delay>
-                            <history>90</history>
-                            <trends>365</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
-                            <allowed_hosts/>
+                            <delay>30s</delay>
+                            <value_type>FLOAT</value_type>
                             <units>°C</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>NUT UPS</name>
                                 </application>
                             </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <application_prototypes/>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last(0)}&gt;30</expression>
+                                    <name>UPS {#UPSNAME} Temperature</name>
+                                    <priority>HIGH</priority>
+                                    <type>MULTIPLE</type>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=7</expression>
-                            <name>UPS {#UPSNAME} Status - Bypass</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description>UPS bypass circuit is active echo no battery protection is available</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=0</expression>
-                            <name>UPS {#UPSNAME} Unknown status</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description>UPS status unknown</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=5</expression>
-                            <name>UPS {#UPSNAME} status - Battery charging</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description>UPS battery charging</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=9</expression>
-                            <name>UPS {#UPSNAME} status - Switched off</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description>UPS switched off!</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=8</expression>
-                            <name>UPS {#UPSNAME} status - Calibration</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description>UPS battery calibration</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=3</expression>
-                            <name>UPS {#UPSNAME} status - Low battery</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description>UPS low battery</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=10</expression>
-                            <name>UPS {#UPSNAME} status - overloadа</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description>UPS overload!</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=2</expression>
-                            <name>UPS {#UPSNAME} status - On battery</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description>UPS on battery</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.status].last(0)}=11</expression>
-                            <name>UPS {#UPSNAME} status - Trimming incoming voltage</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description>UPS trimming incoming voltage</description>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},ups.temperature].last(0)}&gt;30</expression>
-                            <name>UPS {#UPSNAME} Temperature</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>4</priority>
-                            <description/>
-                            <type>1</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},battery.charge].last(0)}&lt;40</expression>
-                            <name>UPS {#UPSNAME} Battery level &lt; 40%</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{NUT UPS:upsmon[{#UPSNAME},battery.charge].last(0)}&lt;90</expression>
-                            <name>UPS {#UPSNAME} Battery level &lt; 90%</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>1</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>UPS {#UPSNAME} load</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>1</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
+                            <name>UPS {#UPSNAME} AC input frequency</name>
                             <graph_items>
                                 <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
                                     <color>C80000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
                                     <item>
-                                        <host>NUT UPS</host>
-                                        <key>upsmon[{#UPSNAME},ups.load]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>UPS {#UPSNAME} input voltage</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C80000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>NUT UPS</host>
-                                        <key>upsmon[{#UPSNAME},input.voltage]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>00C800</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>NUT UPS</host>
-                                        <key>upsmon[{#UPSNAME},output.voltage]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>UPS {#UPSNAME} temperature</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
-                                    <color>C80000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>NUT UPS</host>
-                                        <key>upsmon[{#UPSNAME},ups.temperature]</key>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
+                                        <key>upsmon[{#UPSNAME},input.frequency]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
                             <name>UPS {#UPSNAME} battery charge</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>1</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <ymax_type_1>FIXED</ymax_type_1>
                             <graph_items>
                                 <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
                                     <color>C80000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
                                     <item>
-                                        <host>NUT UPS</host>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
                                         <key>upsmon[{#UPSNAME},battery.charge]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                         <graph_prototype>
-                            <name>UPS {#UPSNAME} AC input frequency</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
-                            <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>0</ymin_type_1>
-                            <ymax_type_1>0</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
+                            <name>UPS {#UPSNAME} input voltage</name>
                             <graph_items>
                                 <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>0</drawtype>
                                     <color>C80000</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
                                     <item>
-                                        <host>NUT UPS</host>
-                                        <key>upsmon[{#UPSNAME},input.frequency]</key>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
+                                        <key>upsmon[{#UPSNAME},input.voltage]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>00C800</color>
+                                    <item>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
+                                        <key>upsmon[{#UPSNAME},output.voltage]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>UPS {#UPSNAME} load</name>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <ymax_type_1>FIXED</ymax_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>C80000</color>
+                                    <item>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
+                                        <key>upsmon[{#UPSNAME},ups.load]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>UPS {#UPSNAME} temperature</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>C80000</color>
+                                    <item>
+                                        <host>Template Futur-Tech Module pfSense NUT UPS</host>
+                                        <key>upsmon[{#UPSNAME},ups.temperature]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                     </graph_prototypes>
-                    <host_prototypes/>
                 </discovery_rule>
             </discovery_rules>
-            <macros/>
-            <templates/>
-            <screens/>
         </template>
     </templates>
     <value_maps>
