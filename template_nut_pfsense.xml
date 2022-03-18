@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2021-05-03T15:33:36Z</date>
+    <date>2022-03-18T16:33:43Z</date>
     <groups>
         <group>
             <name>Templates/Futur-Tech/Modules pfSense</name>
@@ -24,8 +24,32 @@
             <discovery_rules>
                 <discovery_rule>
                     <name>NUT UPS Discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
                     <key>upsmon[ups.discovery]</key>
                     <delay>6h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#UPSNAME}</macro>
+                                <value>not found</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#UPSNAME}</macro>
+                                <value>Error: Protocol error</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#UPSNAME}</macro>
+                                <value>{$UPS.UPSNAME.NOT_MATCH}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>C</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
                     <item_prototypes>
                         <item_prototype>
                             <name>UPS {#UPSNAME} battery charge</name>
@@ -436,7 +460,7 @@
                                 </trigger_prototype>
                                 <trigger_prototype>
                                     <expression>{last(0)}=10</expression>
-                                    <name>UPS {#UPSNAME} status - overloadа</name>
+                                    <name>UPS {#UPSNAME} status - Overload</name>
                                     <priority>DISASTER</priority>
                                     <description>UPS overload!</description>
                                 </trigger_prototype>
@@ -455,8 +479,8 @@
                                 <trigger_prototype>
                                     <expression>{last(0)}=0</expression>
                                     <name>UPS {#UPSNAME} Unknown status</name>
-                                    <priority>DISASTER</priority>
-                                    <description>UPS status unknown</description>
+                                    <priority>WARNING</priority>
+                                    <description>UPS status unknown (see pfsense-nut-ups.sh)</description>
                                 </trigger_prototype>
                             </trigger_prototypes>
                         </item_prototype>
@@ -558,6 +582,13 @@
                     </graph_prototypes>
                 </discovery_rule>
             </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$UPS.UPSNAME.NOT_MATCH}</macro>
+                    <value>^(ups|qnapups)$</value>
+                    <description>Avoid matching with &quot;alias&quot; dummy-ups created just for Synology and QNAP</description>
+                </macro>
+            </macros>
         </template>
     </templates>
     <value_maps>
