@@ -2,6 +2,8 @@
 
 Right now only pfSense is supported.
 
+Compatible Zabbix 6.0
+
 ## PfSense Install
 
 > You need to have NUT already successfully setup.
