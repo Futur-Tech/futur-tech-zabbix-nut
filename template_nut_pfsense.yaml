@@ -1,7 +1,6 @@
 zabbix_export:
-  version: '6.0'
-  date: '2023-08-02T14:42:52Z'
-  groups:
+  version: '7.0'
+  template_groups:
     - uuid: 8b7531e102ff482088442bcba75af23a
       name: 'Templates/Futur-Tech/Modules pfSense'
   templates:
@@ -20,23 +19,26 @@ zabbix_export:
             evaltype: AND
             conditions:
               - macro: '{#UPSNAME}'
-                value: 'not found'
+                value: 'Error: Protocol error'
                 operator: NOT_MATCHES_REGEX
                 formulaid: A
               - macro: '{#UPSNAME}'
-                value: 'Error: Protocol error'
+                value: 'not found'
                 operator: NOT_MATCHES_REGEX
                 formulaid: B
               - macro: '{#UPSNAME}'
                 value: '{$UPS.UPSNAME.NOT_MATCH}'
                 operator: NOT_MATCHES_REGEX
                 formulaid: C
+          lifetime: 30d
+          enabled_lifetime_type: DISABLE_NEVER
           item_prototypes:
             - uuid: 2410c400ed424a3cacf6b0cb7e01a32d
               name: 'UPS {#UPSNAME} battery charge'
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},battery.charge]'
               delay: 30s
+              history: 90d
               value_type: FLOAT
               units: '%'
               tags:
@@ -56,6 +58,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},battery.runtime]'
               delay: 30s
+              history: 90d
               value_type: FLOAT
               units: min.
               preprocessing:
@@ -70,6 +73,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},battery.voltage]'
               delay: 30s
+              history: 90d
               value_type: FLOAT
               units: В
               tags:
@@ -80,8 +84,9 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},driver.name]'
               delay: 5h
-              trends: '0'
+              history: 90d
               value_type: TEXT
+              trends: '0'
               tags:
                 - tag: Application
                   value: 'NUT UPS'
@@ -89,6 +94,7 @@ zabbix_export:
               name: 'UPS {#UPSNAME} AC input frequency'
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},input.frequency]'
+              history: 90d
               value_type: FLOAT
               units: Гц
               tags:
@@ -98,6 +104,7 @@ zabbix_export:
               name: 'UPS {#UPSNAME} AC input voltage'
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},input.voltage]'
+              history: 90d
               value_type: FLOAT
               units: В
               tags:
@@ -107,6 +114,7 @@ zabbix_export:
               name: 'UPS {#UPSNAME} AC output voltage'
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},output.voltage]'
+              history: 90d
               value_type: FLOAT
               units: В
               tags:
@@ -117,6 +125,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-2]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -128,6 +137,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-3]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -139,6 +149,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-4]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -150,6 +161,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-5]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -161,6 +173,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-6]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -172,6 +185,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-7]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -183,6 +197,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-8]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -194,6 +209,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-9]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -205,6 +221,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm-10]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -216,6 +233,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.alarm]'
               delay: 30s
+              history: 90d
               trends: '0'
               valuemap:
                 name: 'NUT UPS Alarm'
@@ -227,6 +245,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.load]'
               delay: 30s
+              history: 90d
               value_type: FLOAT
               units: '%'
               tags:
@@ -237,8 +256,9 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.mfr]'
               delay: 5h
-              trends: '0'
+              history: 90d
               value_type: TEXT
+              trends: '0'
               tags:
                 - tag: Application
                   value: 'NUT UPS'
@@ -247,8 +267,9 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.model]'
               delay: 5h
-              trends: '0'
+              history: 90d
               value_type: TEXT
+              trends: '0'
               tags:
                 - tag: Application
                   value: 'NUT UPS'
@@ -257,6 +278,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.power.nominal]'
               delay: 5h
+              history: 90d
               units: Вт
               tags:
                 - tag: Application
@@ -266,6 +288,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.status-2]'
               delay: 30s
+              history: 90d
               valuemap:
                 name: 'NUT UPS Status'
               tags:
@@ -276,6 +299,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.status-3]'
               delay: 30s
+              history: 90d
               valuemap:
                 name: 'NUT UPS Status'
               tags:
@@ -286,6 +310,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.status-4]'
               delay: 30s
+              history: 90d
               valuemap:
                 name: 'NUT UPS Status'
               tags:
@@ -296,6 +321,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.status-5]'
               delay: 30s
+              history: 90d
               valuemap:
                 name: 'NUT UPS Status'
               tags:
@@ -306,6 +332,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.status]'
               delay: 30s
+              history: 90d
               valuemap:
                 name: 'NUT UPS Status'
               tags:
@@ -362,6 +389,7 @@ zabbix_export:
               type: ZABBIX_ACTIVE
               key: 'upsmon[{#UPSNAME},ups.temperature]'
               delay: 30s
+              history: 90d
               value_type: FLOAT
               units: °C
               tags:
