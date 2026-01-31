@@ -24,7 +24,6 @@ $S_DIR/ft-util/ft_util_file-deploy "$S_DIR/etc.zabbix/${app_name}.conf" "${ZBX_C
 
 mkdir_if_missing "$bin_dir"
 $S_DIR/ft-util/ft_util_file-deploy "$S_DIR/bin/" "$bin_dir"
-$S_DIR/ft-util/ft_util_file-deploy "$S_DIR/etc.zabbix/${app_name}.conf" "${ZBX_CONF_AGENT_D}/${app_name}.conf"
 enforce_security exec "$bin_dir" adm
 
 echo "
